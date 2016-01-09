@@ -7,7 +7,7 @@ class Api::UserProgramsController < ApplicationController
       unchecked.
       work_published.
       episode_published.
-      where('started_at < ?', Date.tomorrow + 1.day + 5.hours).
+      where('started_at < ?', Date.today + current_user.setting.show_program_days.days + 5.hours).
       includes(:channel, :work, episode: [:work]).
       order(started_at: :desc).
       page(page)
